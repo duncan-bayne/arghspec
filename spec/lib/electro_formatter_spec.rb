@@ -12,7 +12,7 @@ describe Arghspec::ElectroFormatter do
     context 'upon success' do
       let(:failure_notifications) { [] }
 
-      it 'does nothing' do
+      it 'writes nothing to the output' do
         expect{subject.dump_failures(notification)}.not_to change{output}
       end
     end
