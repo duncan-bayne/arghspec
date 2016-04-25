@@ -2,7 +2,7 @@ require 'ostruct'
 require 'spec_helper'
 
 describe Arghspec::ElectroFormatter do
-  let(:formatter) { Arghspec::ElectroFormatter.new(output_stream) }
+  let(:formatter) { Arghspec::ElectroFormatter.new(output_stream, pulse_duration_s: 0) }
   let(:ifkit) { instance_double('Phidgets::InterfaceKit', outputs: [ifkit_output]) }
   let(:notification) { OpenStruct.new(failure_notifications: failure_notifications) }
   let(:output) { output_stream.string }
