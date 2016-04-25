@@ -1,8 +1,6 @@
 # arghspec
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/arghspec`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Momentarily sets a [Phidget I/O board](http://www.phidgets.com/products.php?product_id=1018) output to high when tests fail; this can be used to build an Electrocution Driven Development rig.
 
 ## Installation
 
@@ -22,7 +20,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+`rspec --format Arghspec::ElectroFormatter`
+
+... or specify the default formatter in your configuration (usually in `spec_helper.rb`):
+
+    require 'arghspec'
+    RSpec.configure do |config|
+      config.formatter = Arghspec::ElectroFormatter
+    end
 
 ## Development
 
@@ -32,7 +37,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/arghspec.
+Bug reports and pull requests are welcome on GitHub at https://github.com/duncan-bayne/arghspec.
 
 
 ## License
