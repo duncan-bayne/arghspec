@@ -19,6 +19,11 @@ describe Arghspec::ElectroFormatter do
       it 'writes nothing to the output' do
         expect{formatter.dump_failures(notification)}.not_to change{output}
       end
+
+      it 'does not electrocute the user' do
+        formatter.dump_failures(notification)
+        expect(ifkit_output).not_to have_received(:state=)
+      end
     end
 
     context 'upon single failure' do
