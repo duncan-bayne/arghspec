@@ -19,16 +19,19 @@ class Arghspec::ElectroFormatter < RSpec::Core::Formatters::BaseTextFormatter
 
   def dump_failures(notification)
     super(notification)
-    electrocute_user unless notification.failure_notifications.empty?
+    electrocute_user(notification.failure_notifications.count)
   end
 
   private
 
-  def electrocute_user
+  def electrocute_user(num_failures)
     Phidgets::InterfaceKit.new do |ifkit|
-      ifkit.outputs[0].state = true
-      sleep(@pulse_duration_s)
-      ifkit.outputs[0].state = false
+      num_failures.times do
+        ifkit.outputs[0].state = true
+        sleep(@pulse_duration_s)
+        ifkit.outputs[0].state = false
+        sleep(@pulse_duration_s * 2.0)
+      end
     end
   end
 end

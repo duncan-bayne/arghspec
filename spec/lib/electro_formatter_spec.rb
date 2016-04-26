@@ -21,17 +21,31 @@ describe Arghspec::ElectroFormatter do
       end
     end
 
-    context 'upon success' do
+    context 'upon single failure' do
       let(:failure_notifications) { ['a failure'] }
 
       it 'writes the failure to the output' do
         expect{formatter.dump_failures(notification)}.to change{output}
       end
 
-      it 'electrocutes the user' do
+      it 'electrocutes the user once' do
         formatter.dump_failures(notification)
-        expect(ifkit_output).to have_received(:state=).with(true)
-        expect(ifkit_output).to have_received(:state=).with(false)
+        expect(ifkit_output).to have_received(:state=).with(true).once
+        expect(ifkit_output).to have_received(:state=).with(false).once
+      end
+    end
+
+    context 'upon multiple failures' do
+      let(:failure_notifications) { ['a failure', 'another failure', 'yet another failure'] }
+
+      it 'writes the failure to the output' do
+        expect{formatter.dump_failures(notification)}.to change{output}
+      end
+
+      it 'electrocutes the user once for each failure' do
+        formatter.dump_failures(notification)
+        expect(ifkit_output).to have_received(:state=).with(true).exactly(3).times
+        expect(ifkit_output).to have_received(:state=).with(false).exactly(3).times
       end
     end
   end
