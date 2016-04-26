@@ -5,7 +5,7 @@ require 'rspec/core/formatters/base_text_formatter'
 class Arghspec::ElectroFormatter < RSpec::Core::Formatters::BaseTextFormatter
   RSpec::Core::Formatters.register self, :dump_failures
 
-  DEFAULT_PULSE_DURATION_S = 1
+  DEFAULT_PULSE_DURATION_S = 0.1
 
   def initialize(output)
     @output = output
@@ -32,4 +32,3 @@ class Arghspec::ElectroFormatter < RSpec::Core::Formatters::BaseTextFormatter
     end
   end
 end
-
